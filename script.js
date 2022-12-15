@@ -1,5 +1,6 @@
 //questions
-var questions= [
+var index = 0 
+var questions = [
     {
         question: "Where is the Great Barrier Reef located?", 
         choices: ["Australia", "New Zealand", "Vietnam", "Indonesia"],
@@ -33,6 +34,7 @@ console.log(questions[0].question)
  var startbtn = document.getElementById("startbtn")
  var quiz = document.getElementById("quiz")
  var timer = document.getElementById("timer")
+ var nextQ = document.getElementById("nextQ")
  //tracking time
  var timerid; 
  var time = questions.length * 10; 
@@ -50,8 +52,14 @@ console.log(questions[0].question)
      quiz.removeAttribute("class");
 
      getq();
+     getChoices();
  }
- function getq(){
+ function getq(){ 
+     var htmlQuestions = "<h3>" + questions[index].question + "</h3>"
+     document.getElementById("question").innerHTML = htmlQuestions
+     
+    
+     
 //declare questions here
 //question title
 //displey question textcontent
@@ -59,6 +67,34 @@ console.log(questions[0].question)
 //for loop on choices and create buttons
 
  }
+
+function getChoices() {
+    var htmlChoices = "<ul>"
+
+questions[index].choices.forEach(function(choice) {
+    htmlChoices += "<li> <button>" + choice + "</button> </li> "
+    
+}) 
+htmlChoices += "</ul>"  
+document.getElementById("choices").innerHTML = htmlChoices
+
+}
+
+nextQ.addEventListener("click", function(){
+    index++;
+    if (index <= questions.length-1) {
+        getq()
+    getChoices()
+    }
+    
+
+})
+
+
+
+
+
+
 function clock(){
 time--;
 timer.textContent= time;
